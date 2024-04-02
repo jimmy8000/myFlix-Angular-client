@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/internal/operators';
+import { catchError } from 'rxjs/operators';
 import {
   HttpClient,
   HttpHeaders,
@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://jimmys-flix-bfa74c78fd67.herokuapp.com/';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +22,12 @@ export class UserRegistrationService {
     console.log(userDetails);
     return this.http
       .post(apiUrl + 'users', userDetails)
+      .pipe(catchError(this.handleError));
+  }
+  // User login
+  public userLogin(userDetails: any): Observable<any> {
+    return this.http
+      .post(apiUrl + 'login', userDetails)
       .pipe(catchError(this.handleError));
   }
   // Get all movies
