@@ -1,12 +1,10 @@
-<mat-toolbar class="app-navbar">
-    MyFlix
-    <span class="toolbar-spacer"></span> <!-- This is to push content to the right -->
-    <a mat-button [routerLink]="['/profile']">Profile</a>
-    <a mat-button [routerLink]="['/movies']">Movies</a>
-  </mat-toolbar>
-  
-  <!-- Content below the navbar -->
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
-  
+<mat-toolbar *ngIf="showNavbar" class="app-navbar">
+  MyFlix
+  <span class="toolbar-spacer"></span>
+  <a mat-button [routerLink]="['/profile']">Profile</a>
+  <a mat-button [routerLink]="['/movies']">Movies</a>
+</mat-toolbar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
