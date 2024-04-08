@@ -1,0 +1,92 @@
+/* Base styles for the profile and movie cards */
+mat-card {
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px; /* Rounded corners for a softer look */
+  overflow: hidden; /* Keeps children elements contained within the card */
+}
+
+/* Header styles for a unified look */
+mat-card-header {
+  background-color: #1976d2; /* A deep blue shade consistent with primary branding */
+  color: white;
+  text-align: center;
+  padding: 16px;
+  font-size: 20px; /* Slightly smaller text for better space management */
+}
+
+mat-card-title {
+  font-size: 24px; /* Prominent size for the title */
+}
+
+/* List and content styles for clarity and readability */
+mat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee; /* Adds a subtle divider between items */
+}
+
+.mat-line {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Button styles for a consistent action area */
+button {
+  margin-top: 10px;
+  margin-right: 10px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #145ca8; /* A slightly darker shade on hover for feedback */
+}
+
+/* Styling for the favorite movies grid to ensure visual consistency */
+.movies-container {
+  padding: 16px;
+}
+
+mat-grid-list {
+  width: 100%;
+}
+
+mat-grid-tile {
+  transition: transform 0.3s ease;
+}
+
+mat-grid-tile:hover {
+  transform: scale(1.05); /* Slight scale for interactive feedback */
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+mat-grid-tile-footer {
+  background: rgba(0, 0, 0, 0.6); /* More transparency for subtle overlay */
+  color: white;
+  text-align: center;
+  padding: 8px;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  mat-card {
+    margin: 10px;
+  }
+
+  mat-grid-list {
+    rowHeight: 300px; /* Smaller tiles for smaller screens */
+  }
+}

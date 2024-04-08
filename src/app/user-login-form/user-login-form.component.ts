@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -14,8 +15,10 @@ export class UserLoginFormComponent {
   constructor(
     public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
+  
 
   // This is the function responsible for sending the form inputs to the backend
   loginUser(): void {
@@ -28,9 +31,14 @@ export class UserLoginFormComponent {
         this.snackBar.open('User logged in successfully!', 'OK', {
           duration: 2000
         });
+        this.router.navigate(['movies']);
       },
-      (result) => {
-        this.snackBar.open(result, 'OK', {
+      (error) => {
+        let errorMessage = 'An error occurred while logging in.';
+        if (error.status === 401) {
+          errorMessage = 'Invalid username or password.';
+        }
+        this.snackBar.open(errorMessage, 'OK', {
           duration: 2000
         });
       }

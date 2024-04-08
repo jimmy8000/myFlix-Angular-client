@@ -19,7 +19,6 @@ export class UserRegistrationService {
   constructor(private http: HttpClient) {}
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http
       .post(apiUrl + 'users', userDetails)
       .pipe(catchError(this.handleError));
@@ -67,7 +66,7 @@ export class UserRegistrationService {
   getGenre(name: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + `genres/${name}`, {
+      .get(apiUrl + `movies/genre/${name}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -86,10 +85,10 @@ export class UserRegistrationService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   // Update user
-  updateUser(userDetails: any): Observable<any> {
+  updateUser(username: any, userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .put(apiUrl + `users/${userDetails.Username}`, userDetails, {
+      .put(apiUrl + `users/${username}`, userDetails, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -101,7 +100,7 @@ export class UserRegistrationService {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     return this.http
-      .get(apiUrl + `users/${username}/movies`, {
+      .get(apiUrl + `users/${username}/FavoriteMovies`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -151,6 +150,7 @@ export class UserRegistrationService {
     const body = res;
     return body || {};
   }
+  //Error handling
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {

@@ -1,0 +1,17 @@
+.app-navbar {
+    background-color: rgb(227, 244, 250);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .content {
+    margin-top: 64px;
+  }
+  

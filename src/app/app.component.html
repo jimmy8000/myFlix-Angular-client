@@ -1,11 +1,12 @@
-<div class="main-page">
-  <h1>
-    Welcome to myFlix!
-  </h1>
-  <button mat-raised-button (click)="openUserRegistrationDialog()" style="margin-right: 10px;" color="primary">
-    Sign Up
-  </button>
-  <button mat-raised-button (click)="openUserLoginDialog()" color="primary">
-    Login
-  </button>
-</div>
+<mat-toolbar class="app-navbar">
+    MyFlix
+    <span class="toolbar-spacer"></span> <!-- This is to push content to the right -->
+    <a mat-button [routerLink]="['/profile']">Profile</a>
+    <a mat-button [routerLink]="['/movies']">Movies</a>
+  </mat-toolbar>
+  
+  <!-- Content below the navbar -->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  
