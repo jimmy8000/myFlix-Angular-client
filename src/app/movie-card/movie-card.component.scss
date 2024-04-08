@@ -53,6 +53,10 @@ mat-icon {
     cursor: pointer;
 }
 
+.favorite {
+    color: red; 
+}
+
 /* Responsive Design */
 @media (max-width: 600px) {
     mat-card {
