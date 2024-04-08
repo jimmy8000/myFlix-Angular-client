@@ -1,34 +1,40 @@
 <mat-card *ngIf="userData" class="user-profile">
-    <mat-card-header>
-      <mat-card-title>User Profile</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item>
-          <h3 class="mat-line">Name: {{ userData.Username }}</h3>
-        </mat-list-item>
-        <mat-list-item>
-          <h3 class="mat-line">Email: {{ userData.Email }}</h3>
-        </mat-list-item>
-        <mat-list-item>
-            <h3 class="mat-line">Birthday: {{ userData.Birthday | date:'mediumDate':'UTC' }}</h3>
-        </mat-list-item>
-      </mat-list>
-      <button (click)="openUserUpdateDialog()">Update user</button>
-      <button (click)="deleteUser()">Delete user</button>
-      <div *ngIf="favoriteMovies.length === 0">
-        <p>Favorite movies is empty</p>
-      </div>
-      <div class="movies-container">
-        <mat-grid-list cols="4" rowHeight="350px">
-          <mat-grid-tile *ngFor="let movie of favoriteMovies">
-            <img mat-card-image src="{{movie.ImagePath}}" alt="{{movie.Title}}">
-            <mat-grid-tile-footer>
-              <h3>{{movie.Title}}</h3>
-            </mat-grid-tile-footer>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  
+  <mat-card-header>
+    <mat-card-title>User Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <h3 class="mat-line">Name: {{ userData.Username }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <h3 class="mat-line">Email: {{ userData.Email }}</h3>
+      </mat-list-item>
+      <mat-list-item>
+        <h3 class="mat-line">
+          Birthday: {{ userData.Birthday | date : "mediumDate" : "UTC" }}
+        </h3>
+      </mat-list-item>
+    </mat-list>
+    <button (click)="openUserUpdateDialog()">Update user</button>
+    <button (click)="deleteUser()">Delete user</button>
+    <div *ngIf="favoriteMovies.length === 0">
+      <p>Favorite movies are empty</p>
+    </div>
+    <div class="movies-container">
+      <mat-grid-list cols="4" rowHeight="350px">
+        <mat-grid-tile *ngFor="let movie of favoriteMovies">
+          <img
+            mat-card-image
+            src="{{ movie.ImagePath }}"
+            alt="{{ movie.Title }}"
+          />
+          <mat-grid-tile-footer>
+            <h3>{{ movie.Title }}</h3>
+            <mat-icon class="favorite-icon">favorite</mat-icon>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-card-content>
+</mat-card>

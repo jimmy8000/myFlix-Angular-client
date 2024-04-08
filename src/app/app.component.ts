@@ -19,4 +19,10 @@ export class AppComponent {
       this.showNavbar = !event.url.includes('/welcome');
     });
   }
+  logOut(): void {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    this.router.navigate(['welcome']);
+    this.showNavbar = false;
+  }
 }
