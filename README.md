@@ -1,27 +1,77 @@
-# MyFlixAngularClient
+# Movie Explorer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+Welcome to Movie Explorer, an Angular application designed to help users discover and manage their favorite movies. This app allows users to view movie details, manage their profiles.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- User Authentication: Login and registration functionality to manage user access.
+- Movie Listings: Browse all movies available in the database.
+- Favorites Management: Add or remove movies from your favorites list.
+- Movie Details: View detailed information about each movie, including director and genre specifics.
+- Profile Management: Users can update their profile information or delete their account.
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-## Build
+### Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Before you begin, ensure you have the following installed:
 
-## Running unit tests
+- Node.js (which includes npm)
+- Angular CLI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installation
 
-## Running end-to-end tests
+1. Clone the repository:
+    ```
+    git clone https://github.com/jimmy8000/myFlix-Angular-client.git
+    cd movie-explorer
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Install dependencies:
+    ```
+    npm install
+    ```
 
-## Further help
+3. Start the development server:
+    ```
+    ng serve
+    ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+## Usage
+
+After starting the app, navigate to the home page where you can:
+
+- Register a new user account or login with existing credentials.
+- Browse the available movies.
+- Click on any movie to view its details and manage favorites.
+- Access user profile to update or delete user information.
+
+## Contributing
+
+We welcome contributions to the Movie Explorer! If you have suggestions on how to improve the app, please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch:
+    ```
+    git checkout -b feature/YourFeature
+    ```
+3. Commit your changes:
+    ```
+    git commit -am 'Add some feature'
+    ```
+4. Push to the branch:
+    ```
+    git push origin feature/YourFeature
+    ```
+5. Submit a pull request
+
+
+## Built With
+
+- Angular - The web framework used
+- Angular Material - Material Design components for Angular
+- RxJS - Reactive programming library for JavaScript
