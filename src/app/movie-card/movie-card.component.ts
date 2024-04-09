@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserRegistrationService } from '../fetch-api-data.service';
@@ -11,7 +11,7 @@ import { DetailsComponentComponent } from '../details-component/details-componen
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
-  favoriteMovies: string[] = []; 
+  favoriteMovies: string[] = [];
 
   constructor(
     private fetchApiData: UserRegistrationService,
@@ -26,13 +26,15 @@ export class MovieCardComponent implements OnInit {
     const userName = localStorage.getItem('user') ?? '';
     this.fetchApiData.getUser(userName).subscribe({
       next: (user: any) => {
-        this.favoriteMovies = user.FavoriteMovies;  
+        this.favoriteMovies = user.FavoriteMovies;
         this.getMovies();
       },
       error: (err) => {
         console.error('Error fetching user details:', err);
-        this.snackBar.open('Failed to load user data!', 'OK', { duration: 3000 });
-      }
+        this.snackBar.open('Failed to load user data!', 'OK', {
+          duration: 3000,
+        });
+      },
     });
   }
 
@@ -44,7 +46,7 @@ export class MovieCardComponent implements OnInit {
       error: (err) => {
         console.error('Error fetching movies:', err);
         this.snackBar.open('Failed to load movies!', 'OK', { duration: 3000 });
-      }
+      },
     });
   }
 
@@ -56,17 +58,30 @@ export class MovieCardComponent implements OnInit {
 
   toggleFavorite(movieId: string): void {
     const isFavorite = this.favoriteMovies.includes(movieId);
-    const operation = isFavorite ? this.fetchApiData.removeFavoriteMovie(movieId) : this.fetchApiData.addFavoriteMovie(movieId);
+    const operation = isFavorite
+      ? this.fetchApiData.removeFavoriteMovie(movieId)
+      : this.fetchApiData.addFavoriteMovie(movieId);
 
     operation.subscribe({
       next: () => {
         this.updateFavoriteMovies(movieId, !isFavorite);
-        this.snackBar.open(`${isFavorite ? 'Removed from' : 'Added to'} favorites`, 'OK', { duration: 2000 });
+        this.snackBar.open(
+          `${isFavorite ? 'Removed from' : 'Added to'} favorites`,
+          'OK',
+          { duration: 2000 }
+        );
       },
       error: (err) => {
-        console.error(`Error ${isFavorite ? 'removing' : 'adding'} favorite:`, err);
-        this.snackBar.open(`Failed to ${isFavorite ? 'remove from' : 'add to'} favorites`, 'OK', { duration: 2000 });
-      }
+        console.error(
+          `Error ${isFavorite ? 'removing' : 'adding'} favorite:`,
+          err
+        );
+        this.snackBar.open(
+          `Failed to ${isFavorite ? 'remove from' : 'add to'} favorites`,
+          'OK',
+          { duration: 2000 }
+        );
+      },
     });
   }
 

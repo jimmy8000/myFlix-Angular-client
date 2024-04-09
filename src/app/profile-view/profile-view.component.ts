@@ -24,6 +24,7 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
   userData: UserData | null = null;
   favoriteMovies: any[] = [];
   private subscriptions: Subscription = new Subscription();
+  MovieCardComponent: any;
 
   constructor(
     private fetchApiData: UserRegistrationService,
@@ -48,30 +49,43 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
     const user = this.getCurrentUser();
     if (user) {
       this.subscriptions.add(
-        this.fetchApiData.getUser(user).pipe(
-          catchError(error => {
-            console.error('Error fetching user data:', error);
-            this.snackBar.open('Something bad happened; please try again later.', 'OK', {
-              duration: 2000,
-            });
-            return throwError(() => new Error('Error fetching user data'));
-          })
-        ).subscribe({
-          next: (resp: UserData) => {
-            this.userData = resp;
-            this.fetchApiData.getAllMovies().subscribe((response: any) => {
-              this.favoriteMovies = response.filter((movie: any) => {
-                return this.userData?.FavoriteMovies?.includes(movie._id) ?? false;
+        this.fetchApiData
+          .getUser(user)
+          .pipe(
+            catchError((error) => {
+              console.error('Error fetching user data:', error);
+              this.snackBar.open(
+                'Something bad happened; please try again later.',
+                'OK',
+                {
+                  duration: 2000,
+                }
+              );
+              return throwError(() => new Error('Error fetching user data'));
+            })
+          )
+          .subscribe({
+            next: (resp: UserData) => {
+              this.userData = resp;
+              this.fetchApiData.getAllMovies().subscribe((response: any) => {
+                this.favoriteMovies = response.filter((movie: any) => {
+                  return (
+                    this.userData?.FavoriteMovies?.includes(movie._id) ?? false
+                  );
+                });
               });
-            });
-          },
-          error: (error) => {
-            console.error('Error fetching user data:', error);
-            this.snackBar.open('Something bad happened; please try again later.', 'OK', {
-              duration: 2000,
-            });
-          },
-        })
+            },
+            error: (error) => {
+              console.error('Error fetching user data:', error);
+              this.snackBar.open(
+                'Something bad happened; please try again later.',
+                'OK',
+                {
+                  duration: 2000,
+                }
+              );
+            },
+          })
       );
     } else {
       this.snackBar.open('No user found; please log in again.', 'OK', {
@@ -79,7 +93,6 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
       });
     }
   }
-  
 
   openUserUpdateDialog(): void {
     const dialogRef = this.dialog.open(UserRegistrationFormComponent, {
@@ -97,12 +110,12 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(): void {
-    if(confirm('Do you want to delete your account permanently?')) {
+    if (confirm('Do you want to delete your account permanently?')) {
       try {
         this.router.navigate(['/welcome']).then(() => {
           localStorage.clear();
           this.snackBar.open('Your account has been deleted', 'OK', {
-            duration: 3000
+            duration: 3000,
           });
         });
         this.fetchApiData.deleteUser().subscribe((result) => {
@@ -110,9 +123,13 @@ export class ProfileViewComponent implements OnInit, OnDestroy {
         });
       } catch (error) {
         console.error('Error deleting user:', error);
-        this.snackBar.open('Something went wrong while deleting your account. Please try again later.', 'OK', {
-          duration: 3000
-        });
+        this.snackBar.open(
+          'Something went wrong while deleting your account. Please try again later.',
+          'OK',
+          {
+            duration: 3000,
+          }
+        );
       }
     }
   }
